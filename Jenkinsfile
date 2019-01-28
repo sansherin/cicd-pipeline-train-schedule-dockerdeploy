@@ -30,7 +30,7 @@ pipeline {
 
                 script {
 
-                    app = docker.build("willbla/train-schedule")
+                    app = docker.build("sansherin/train-schedule")
 
                     app.inside {
 
@@ -88,7 +88,7 @@ pipeline {
 
                     script {
 
-                        sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$prod_ip \"docker pull willbla/train-schedule:${env.BUILD_NUMBER}\""
+                        sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$prod_ip \"docker pull sansherin/train-schedule:${env.BUILD_NUMBER}\""
 
                         try {
 
@@ -102,7 +102,7 @@ pipeline {
 
                         }
 
-                        sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$prod_ip \"docker run --restart always --name train-schedule -p 8080:8080 -d willbla/train-schedule:${env.BUILD_NUMBER}\""
+                        sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$prod_ip \"docker run --restart always --name train-schedule -p 8080:8080 -d sansherin/train-schedule:${env.BUILD_NUMBER}\""
 
                     }
 
